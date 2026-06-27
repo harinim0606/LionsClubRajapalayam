@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import toast from "react-hot-toast";
 import {
   Download, Users, Filter as FilterIcon, MousePointer2,
-  FileText, BarChart3, Sparkles, Database, Clock, TrendingUp, RefreshCw
+  FileText, BarChart3, Clock, TrendingUp, RefreshCw
 } from "lucide-react";
 import api from "../../api/axios";
 
@@ -269,33 +269,15 @@ const AdminExport = () => {
     <div className="space-y-6 pb-16">
 
       {/* ── Hero Banner */}
-      <motion.div
-        initial={{ opacity: 0, y: -10 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="relative bg-gradient-to-r from-[#071D43] via-[#0A2A5E] to-[#0d3a7e] rounded-3xl p-6 sm:p-8 overflow-hidden"
-      >
-        <div className="absolute -top-8 -right-8 w-56 h-56 rounded-full bg-[#F4B400]/10 blur-3xl" />
-        <div className="absolute bottom-0 left-1/3 w-32 h-32 rounded-full bg-white/5 blur-2xl" />
-        <div className="relative flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-          <div>
-            <div className="flex items-center gap-2 mb-2">
-              <Sparkles size={18} className="text-[#F4B400]" />
-              <span className="text-[#F4B400] text-sm font-bold uppercase tracking-widest">Module 13</span>
-            </div>
-            <h1 className="text-white text-3xl font-black font-heading leading-tight">
-              Advanced Excel Export
-            </h1>
-            <p className="text-blue-200 text-sm mt-1.5 max-w-lg">
-              Generate customized, professionally formatted Excel workbooks from your member database. Supports 10,000+ members with streaming export.
-            </p>
-          </div>
-          <div className="flex items-center gap-3 shrink-0">
-            <div className="w-14 h-14 rounded-2xl bg-[#F4B400]/20 flex items-center justify-center">
-              <Database size={28} className="text-[#F4B400]" />
-            </div>
-          </div>
+      {/* Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white dark:bg-[#1E293B] p-6 rounded-3xl border border-gray-100 dark:border-gray-800 shadow-sm">
+        <div>
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white font-heading">Excel Export</h1>
+          <p className="text-sm text-gray-500 dark:text-gray-400 font-medium mt-1">
+            Generate customized, professionally formatted Excel workbooks from your member database. Supports 10,000+ members with streaming export.
+          </p>
         </div>
-      </motion.div>
+      </div>
 
       {/* ── Stats Cards */}
       <div className="grid grid-cols-2 xl:grid-cols-4 gap-4">
