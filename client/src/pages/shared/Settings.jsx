@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { useSettings } from "../../context/SettingsContext";
+import api from "../../api/axios";
 import toast from "react-hot-toast";
 import { 
-  Monitor, Moon, Sun, Type, Eye, Accessibility, 
-  AlignLeft, LayoutGrid, Palette, Check, Save, RotateCcw
+  Monitor, Moon, Sun, Type, Eye, EyeOff, Accessibility, 
+  AlignLeft, LayoutGrid, Palette, Check, Save, RotateCcw,
+  Lock, Shield, KeyRound, CheckCircle2
 } from "lucide-react";
 
 const Settings = () => {
@@ -15,7 +17,13 @@ const Settings = () => {
   // Local state for edits before saving
   const [localSettings, setLocalSettings] = useState(settings);
   const [isSaving, setIsSaving] = useState(false);
-  const [activeTab, setActiveTab] = useState("appearance"); // appearance, language, accessibility
+  const [activeTab, setActiveTab] = useState("appearance"); // appearance, language, accessibility, security
+
+  // Password change state
+  const [pwForm, setPwForm] = useState({ currentPassword: "", newPassword: "", confirmPassword: "" });
+  const [pwShow, setPwShow] = useState({ current: false, newPw: false, confirm: false });
+  const [pwLoading, setPwLoading] = useState(false);
+  const [pwErrors, setPwErrors] = useState({});
 
   // Keep local state synced if global changes externally (unlikely but good practice)
   React.useEffect(() => {
@@ -67,6 +75,51 @@ const Settings = () => {
       ...prev,
       accessibility: { ...prev.accessibility, [key]: value }
     }));
+  };
+
+  // --- Password handlers ---
+  const getPasswordStrength = (pw) => {
+    if (!pw) return { score: 0, label: "", color: "" };
+    let score = 0;
+    if (pw.length >= 8) score++;
+    if (/[A-Z]/.test(pw)) score++;
+    if (/[0-9]/.test(pw)) score++;
+    if (/[^A-Za-z0-9]/.test(pw)) score++;
+    const levels = [
+      { label: "Too short", color: "bg-red-400" },
+      { label: "Weak", color: "bg-red-400" },
+      { label: "Fair", color: "bg-amber-400" },
+      { label: "Good", color: "bg-blue-400" },
+      { label: "Strong", color: "bg-green-500" },
+    ];
+    return { score, ...levels[score] };
+  };
+
+  const handleChangePassword = async (e) => {
+    e.preventDefault();
+    const errors = {};
+    if (!pwForm.currentPassword) errors.currentPassword = "Current password is required.";
+    if (pwForm.newPassword.length < 8) errors.newPassword = "Password must be at least 8 characters.";
+    if (pwForm.newPassword !== pwForm.confirmPassword) errors.confirmPassword = "Passwords do not match.";
+    if (Object.keys(errors).length > 0) { setPwErrors(errors); return; }
+    setPwErrors({});
+    setPwLoading(true);
+    try {
+      await api.post("/auth/change-password", {
+        currentPassword: pwForm.currentPassword,
+        newPassword: pwForm.newPassword,
+      });
+      toast.success("Password changed successfully!");
+      setPwForm({ currentPassword: "", newPassword: "", confirmPassword: "" });
+    } catch (err) {
+      const msg = err.response?.data?.message || "Failed to change password.";
+      toast.error(msg);
+      if (msg.toLowerCase().includes("current")) {
+        setPwErrors({ currentPassword: msg });
+      }
+    } finally {
+      setPwLoading(false);
+    }
   };
 
   // --- Components for sections ---
@@ -258,6 +311,103 @@ const Settings = () => {
     </motion.div>
   );
 
+  const SecuritySection = () => {
+    const strength = getPasswordStrength(pwForm.newPassword);
+    const PwField = ({ id, label, value, showKey, placeholder, error }) => (
+      <div>
+        <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1.5">{label}</label>
+        <div className="relative">
+          <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <Lock size={16} className="text-gray-400" />
+          </div>
+          <input
+            type={pwShow[showKey] ? "text" : "password"}
+            value={value}
+            onChange={(e) => setPwForm(p => ({ ...p, [id]: e.target.value }))}
+            placeholder={placeholder}
+            className={`w-full pl-9 pr-10 py-3 rounded-xl border text-sm transition-all outline-none focus:ring-2 focus:ring-[#0A2A5E]/30 dark:focus:ring-[#F4B400]/30 bg-gray-50 dark:bg-gray-800 dark:text-white ${
+              error 
+                ? "border-red-400 focus:border-red-400" 
+                : "border-gray-200 dark:border-gray-700 focus:border-[#0A2A5E] dark:focus:border-[#F4B400]"
+            }`}
+          />
+          <button
+            type="button"
+            onClick={() => setPwShow(p => ({ ...p, [showKey]: !p[showKey] }))}
+            className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600"
+          >
+            {pwShow[showKey] ? <EyeOff size={16} /> : <Eye size={16} />}
+          </button>
+        </div>
+        {error && <p className="text-xs text-red-500 mt-1 flex items-center gap-1"><span>⚠</span> {error}</p>}
+      </div>
+    );
+    return (
+      <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="space-y-6">
+        {/* Header */}
+        <div className="flex items-center gap-3 pb-2 border-b border-gray-100 dark:border-gray-800">
+          <div className="w-10 h-10 rounded-xl bg-[#0A2A5E]/10 dark:bg-[#F4B400]/10 flex items-center justify-center">
+            <KeyRound size={20} className="text-[#0A2A5E] dark:text-[#F4B400]" />
+          </div>
+          <div>
+            <h3 className="font-bold text-gray-900 dark:text-white">Change Password</h3>
+            <p className="text-xs text-gray-500 dark:text-gray-400">Update your account password. You'll need your current password to make changes.</p>
+          </div>
+        </div>
+
+        <form onSubmit={handleChangePassword} className="space-y-5 max-w-md">
+          <PwField id="currentPassword" label="Current Password" value={pwForm.currentPassword} showKey="current" placeholder="Enter your current password" error={pwErrors.currentPassword} />
+
+          <div className="h-px bg-gray-100 dark:bg-gray-800" />
+
+          <PwField id="newPassword" label="New Password" value={pwForm.newPassword} showKey="newPw" placeholder="Minimum 8 characters" error={pwErrors.newPassword} />
+
+          {/* Strength Indicator */}
+          {pwForm.newPassword && (
+            <div className="space-y-1.5">
+              <div className="flex gap-1">
+                {[1,2,3,4].map(i => (
+                  <div key={i} className={`h-1.5 flex-1 rounded-full transition-all ${i <= strength.score ? strength.color : "bg-gray-200 dark:bg-gray-700"}`} />
+                ))}
+              </div>
+              <p className={`text-xs font-semibold ${
+                strength.score <= 1 ? "text-red-500" : strength.score === 2 ? "text-amber-500" : strength.score === 3 ? "text-blue-500" : "text-green-600"
+              }`}>{strength.label}</p>
+              <ul className="text-xs text-gray-500 dark:text-gray-400 space-y-0.5 mt-1">
+                {[{test: pwForm.newPassword.length >= 8, label: "At least 8 characters"}, {test: /[A-Z]/.test(pwForm.newPassword), label: "One uppercase letter"}, {test: /[0-9]/.test(pwForm.newPassword), label: "One number"}, {test: /[^A-Za-z0-9]/.test(pwForm.newPassword), label: "One special character"}].map(({test, label}) => (
+                  <li key={label} className={`flex items-center gap-1.5 ${test ? "text-green-600" : ""}`}>
+                    <CheckCircle2 size={11} className={test ? "text-green-500" : "text-gray-300"} /> {label}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          <PwField id="confirmPassword" label="Confirm New Password" value={pwForm.confirmPassword} showKey="confirm" placeholder="Re-enter new password" error={pwErrors.confirmPassword} />
+
+          <button
+            type="submit"
+            disabled={pwLoading}
+            className="w-full flex items-center justify-center gap-2 py-3 px-6 bg-[#0A2A5E] hover:bg-[#071D43] dark:bg-[#F4B400] dark:hover:bg-[#D69E00] text-white dark:text-black rounded-xl font-bold transition-all shadow-md disabled:opacity-70"
+          >
+            {pwLoading ? <div className="w-5 h-5 border-2 border-white/30 border-t-white dark:border-black/20 dark:border-t-black rounded-full animate-spin" /> : <Shield size={18} />}
+            {pwLoading ? "Updating..." : "Update Password"}
+          </button>
+        </form>
+
+        {/* Security Tips */}
+        <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-100 dark:border-blue-800 rounded-2xl p-4 max-w-md">
+          <p className="text-xs font-bold text-blue-800 dark:text-blue-300 uppercase tracking-wider mb-2">Security Tips</p>
+          <ul className="text-xs text-blue-700 dark:text-blue-400 space-y-1">
+            <li>• Never share your password with anyone.</li>
+            <li>• Use a mix of letters, numbers and symbols.</li>
+            <li>• Your default password is your Date of Birth (DDMMYYYY).</li>
+          </ul>
+        </div>
+      </motion.div>
+    );
+  };
+
   return (
     <div className="max-w-4xl mx-auto space-y-6 pb-20">
       
@@ -291,7 +441,8 @@ const Settings = () => {
           {[
             { id: "appearance", icon: Palette, label: t("settings.appearance.title") },
             { id: "language", icon: Type, label: t("settings.language.title") },
-            { id: "accessibility", icon: Accessibility, label: t("settings.accessibility.title") }
+            { id: "accessibility", icon: Accessibility, label: t("settings.accessibility.title") },
+            { id: "security", icon: Shield, label: "Security" }
           ].map(tab => (
             <button
               key={tab.id}
@@ -314,6 +465,7 @@ const Settings = () => {
             {activeTab === "appearance" && <AppearanceSection key="appearance" />}
             {activeTab === "language" && <LanguageSection key="language" />}
             {activeTab === "accessibility" && <AccessibilitySection key="accessibility" />}
+            {activeTab === "security" && <SecuritySection key="security" />}
           </AnimatePresence>
         </div>
       </div>
