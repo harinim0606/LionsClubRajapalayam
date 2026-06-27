@@ -114,7 +114,7 @@ const AppLayout = () => {
                     : "text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 hover:text-[#0A2A5E] dark:hover:text-white"
                 }`}
               >
-                <item.icon size={22} className={`shrink-0 ${isActive ? "text-[#F4B400]" : "text-gray-400 group-hover:text-[#0A2A5E]"}`} />
+                <item.icon size={22} className={`shrink-0 ${isActive ? "text-[#F4B400] dark:text-black" : "text-gray-400 group-hover:text-[#0A2A5E] dark:group-hover:text-[#F4B400]"}`} />
                 {sidebarOpen && (
                   <span className="font-medium whitespace-nowrap">{item.name}</span>
                 )}
@@ -124,7 +124,7 @@ const AppLayout = () => {
         </div>
 
         {/* Collapse Toggle Button (Desktop only) */}
-        <div className="hidden md:flex p-4 border-t border-gray-100">
+        <div className="hidden md:flex p-4 border-t border-gray-100 dark:border-gray-800">
           <button 
             onClick={toggleSidebar}
             className="w-full flex items-center justify-center p-2 text-gray-400 dark:text-gray-500 hover:bg-gray-50 dark:hover:bg-gray-800 hover:text-gray-600 dark:hover:text-gray-300 rounded-lg transition-colors"
@@ -146,7 +146,7 @@ const AppLayout = () => {
             >
               <Menu size={24} />
             </button>
-            <h1 className="text-xl font-heading font-semibold text-gray-800 hidden sm:block truncate">
+            <h1 className="text-xl font-heading font-semibold text-gray-800 dark:text-white hidden sm:block truncate">
               {navItems.find(item => location.pathname.includes(item.path))?.name || "Portal"}
             </h1>
           </div>
@@ -157,7 +157,7 @@ const AppLayout = () => {
                 <p className="text-sm font-semibold text-gray-900 dark:text-white">{user.name}</p>
                 <p className="text-xs text-gray-500 dark:text-gray-400 capitalize">{t(`sidebar.${user.role}`)}</p>
               </div>
-              <div className="h-10 w-10 rounded-full bg-gray-100 border border-gray-200 flex items-center justify-center overflow-hidden">
+              <div className="h-10 w-10 rounded-full bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 flex items-center justify-center overflow-hidden">
                 {user.avatar ? (
                   <img src={user.avatar} alt="Avatar" className="h-full w-full object-cover" />
                 ) : (
@@ -165,10 +165,10 @@ const AppLayout = () => {
                 )}
               </div>
             </div>
-            <div className="w-px h-8 bg-gray-200 mx-1 hidden sm:block"></div>
+            <div className="w-px h-8 bg-gray-200 dark:bg-gray-700 mx-1 hidden sm:block"></div>
             <button 
               onClick={logout}
-              className="flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-red-600 transition-colors p-2 rounded-lg hover:bg-red-50"
+              className="flex items-center gap-2 text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400 transition-colors p-2 rounded-lg hover:bg-red-50 dark:hover:bg-red-950/20"
               title="Logout"
             >
               <LogOut size={18} />

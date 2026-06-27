@@ -29,7 +29,7 @@ const Checkbox = ({ checked, indeterminate, onChange }) => {
 const MembersTable = ({ members, loading, onEdit, onView, onDelete, selectedIds = [], onSelectAll, onSelectOne, customActions }) => {
   if (loading) {
     return (
-      <div className="bg-white rounded-3xl border border-gray-100 shadow-sm overflow-hidden">
+      <div className="bg-white dark:bg-[#1E293B] rounded-3xl border border-gray-100 dark:border-gray-800 shadow-sm overflow-hidden">
         <div className="p-4 space-y-4">
           {[...Array(5)].map((_, i) => (
             <div key={i} className="flex gap-4 animate-pulse">
@@ -47,7 +47,7 @@ const MembersTable = ({ members, loading, onEdit, onView, onDelete, selectedIds 
 
   if (!members || members.length === 0) {
     return (
-      <div className="bg-white rounded-3xl border border-gray-100 shadow-sm overflow-hidden p-8">
+      <div className="bg-white dark:bg-[#1E293B] rounded-3xl border border-gray-100 dark:border-gray-800 shadow-sm overflow-hidden p-8">
         <DashboardEmptyState icon="👥" message="No members found matching your search or filters." />
       </div>
     );
@@ -69,11 +69,11 @@ const MembersTable = ({ members, loading, onEdit, onView, onDelete, selectedIds 
   };
 
   return (
-    <div className="bg-white rounded-3xl border border-gray-100 shadow-sm overflow-hidden">
+    <div className="bg-white dark:bg-[#1E293B] rounded-3xl border border-gray-100 dark:border-gray-800 shadow-sm overflow-hidden">
       <div className="overflow-x-auto">
         <table className="w-full text-left border-collapse">
           <thead>
-            <tr className="bg-gray-50/50 border-b border-gray-100">
+            <tr className="bg-gray-50/50 dark:bg-gray-850/50 border-b border-gray-100 dark:border-gray-800">
               <th className="px-6 py-4 w-12 text-center">
                 <Checkbox
                   checked={isAllVisibleSelected}
@@ -88,15 +88,15 @@ const MembersTable = ({ members, loading, onEdit, onView, onDelete, selectedIds 
               <th className="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider text-right">Actions</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-100">
+          <tbody className="divide-y divide-gray-100 dark:divide-gray-800">
             {members.map((member) => {
               const isSelected = selectedIds.includes(member._id);
               
               return (
               <tr 
                 key={member._id} 
-                className={`hover:bg-gray-50/80 transition-colors group relative ${
-                  isSelected ? "bg-[#0A2A5E]/[0.02]" : ""
+                className={`hover:bg-gray-50/80 dark:hover:bg-gray-800/80 transition-colors group relative ${
+                  isSelected ? "bg-[#0A2A5E]/[0.02] dark:bg-[#F4B400]/[0.02]" : ""
                 }`}
               >
                 {/* Selection Highlight Border */}
@@ -116,33 +116,33 @@ const MembersTable = ({ members, loading, onEdit, onView, onDelete, selectedIds 
                 <td className="px-6 py-4">
                   <div className="flex items-center gap-3">
                     {member.avatar ? (
-                      <img src={member.avatar} alt={member.name} className="w-10 h-10 rounded-xl object-cover border border-gray-200" />
+                      <img src={member.avatar} alt={member.name} className="w-10 h-10 rounded-xl object-cover border border-gray-200 dark:border-gray-700" />
                     ) : (
-                      <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#0A2A5E] to-[#1a4080] flex items-center justify-center text-white text-xs font-bold shadow-sm">
+                      <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#0A2A5E] to-[#1a4080] dark:from-[#F4B400] dark:to-[#D69E00] flex items-center justify-center text-white dark:text-black text-xs font-bold shadow-sm">
                         {getInitials(member.name)}
                       </div>
                     )}
                     <div>
-                      <p className="text-sm font-bold text-gray-900 group-hover:text-[#0A2A5E] transition-colors">{member.name}</p>
-                      <p className="text-xs text-gray-500 font-medium">#{member.memberNumber}</p>
+                      <p className="text-sm font-bold text-gray-900 dark:text-white group-hover:text-[#0A2A5E] dark:group-hover:text-[#F4B400] transition-colors">{member.name}</p>
+                      <p className="text-xs text-gray-500 dark:text-gray-400 font-medium">#{member.memberNumber}</p>
                     </div>
                   </div>
                 </td>
 
                 {/* Contact */}
                 <td className="px-6 py-4">
-                  <p className="text-sm text-gray-700">{member.mobile}</p>
-                  {member.email && <p className="text-xs text-gray-500 truncate max-w-[150px]">{member.email}</p>}
+                  <p className="text-sm text-gray-700 dark:text-gray-300">{member.mobile}</p>
+                  {member.email && <p className="text-xs text-gray-500 dark:text-gray-400 truncate max-w-[150px]">{member.email}</p>}
                 </td>
 
                 {/* Position */}
                 <td className="px-6 py-4">
                   {member.clubPosition ? (
                     <div>
-                      <span className="inline-block text-xs font-semibold text-[#0A2A5E] bg-[#0A2A5E]/8 px-2 py-0.5 rounded-full">
+                      <span className="inline-block text-xs font-semibold text-[#0A2A5E] bg-[#0A2A5E]/8 dark:text-[#F4B400] dark:bg-[#F4B400]/10 px-2 py-0.5 rounded-full">
                         {member.clubPosition}
                       </span>
-                      {member.joiningYear && <p className="text-[10px] text-gray-400 mt-1 uppercase font-bold tracking-wider">Joined {member.joiningYear}</p>}
+                      {member.joiningYear && <p className="text-[10px] text-gray-400 dark:text-gray-500 mt-1 uppercase font-bold tracking-wider">Joined {member.joiningYear}</p>}
                     </div>
                   ) : (
                     <span className="text-gray-400 text-sm">-</span>
@@ -153,8 +153,8 @@ const MembersTable = ({ members, loading, onEdit, onView, onDelete, selectedIds 
                 <td className="px-6 py-4">
                   <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold ${
                     member.status === 'active' 
-                      ? 'bg-green-50 text-green-700 border border-green-100' 
-                      : 'bg-gray-100 text-gray-600 border border-gray-200'
+                      ? 'bg-green-50 dark:bg-green-950/20 text-green-700 dark:text-green-400 border border-green-100 dark:border-green-900/30' 
+                      : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 border border-gray-200 dark:border-gray-700'
                   }`}>
                     <span className={`w-1.5 h-1.5 rounded-full ${member.status === 'active' ? 'bg-green-500' : 'bg-gray-400'}`} />
                     {member.status === 'active' ? 'Active' : 'Inactive'}
