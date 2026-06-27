@@ -66,7 +66,7 @@ const GreetingBanner = ({ user }) => {
       <div className="relative">
         <p className="text-[#F4B400] text-sm font-semibold uppercase tracking-widest">{greeting}</p>
         <h1 className="text-white text-2xl sm:text-3xl font-black font-heading mt-1">
-          Lion {user?.name || "Admin"} 🦁
+          Lion {user?.name || "Admin"}
         </h1>
         <p className="text-blue-200 text-sm mt-1">{today}</p>
 
