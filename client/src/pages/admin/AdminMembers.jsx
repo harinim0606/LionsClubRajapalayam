@@ -1,6 +1,6 @@
 import { useState, useEffect, lazy, Suspense, useCallback } from "react";
 import { motion } from "framer-motion";
-import { UserPlus, RefreshCw, Download, ChevronLeft, ChevronRight } from "lucide-react";
+import { UserPlus, RefreshCw, ChevronLeft, ChevronRight } from "lucide-react";
 import api from "../../api/axios";
 import toast from "react-hot-toast";
 
@@ -213,13 +213,7 @@ const AdminMembers = () => {
           >
             <RefreshCw size={18} />
           </button>
-          <a
-            href="/api/admin/export"
-            download
-            className="flex items-center gap-2 px-4 py-2 bg-emerald-50 text-emerald-700 hover:bg-emerald-100 border border-emerald-200 rounded-xl text-sm font-semibold transition-colors"
-          >
-            <Download size={16} /> Export
-          </a>
+
           <button
             onClick={() => { setSelectedMember(null); setIsFormOpen(true); }}
             className="flex items-center gap-2 px-5 py-2.5 bg-[#0A2A5E] text-white rounded-xl font-bold hover:bg-[#071D43] transition-colors shadow-sm shadow-blue-900/20"
