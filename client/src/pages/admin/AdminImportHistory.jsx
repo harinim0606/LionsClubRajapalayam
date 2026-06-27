@@ -61,12 +61,12 @@ const DetailModal = ({ record, onClose }) => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-gray-900/60 backdrop-blur-sm" onClick={onClose}>
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-gray-900/60 backdrop-blur-sm animate-fade-in" onClick={onClose}>
       <motion.div
         initial={{ opacity: 0, scale: 0.95, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.95, y: 20 }}
-        className="bg-white rounded-3xl shadow-2xl w-full max-w-2xl overflow-hidden"
+        className="bg-white dark:bg-[#1E293B] border border-gray-100 dark:border-gray-800 rounded-3xl shadow-2xl w-full max-w-2xl overflow-hidden"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
@@ -85,12 +85,12 @@ const DetailModal = ({ record, onClose }) => {
           {/* Status + Timing */}
           <div className="flex flex-wrap gap-3 items-center">
             <StatusBadge status={record.status} />
-            <span className="text-xs font-medium text-gray-500 flex items-center gap-1">
+            <span className="text-xs font-medium text-gray-500 dark:text-gray-400 flex items-center gap-1">
               <Clock size={12} /> {formatDuration(record.executionTime)}
             </span>
             {record.importedBy && (
-              <span className="text-xs font-medium text-gray-500">
-                By: <span className="font-bold text-gray-700">{record.importedBy.username || record.importedBy.name}</span>
+              <span className="text-xs font-medium text-gray-500 dark:text-gray-400">
+                By: <span className="font-bold text-gray-700 dark:text-white">{record.importedBy.username || record.importedBy.name}</span>
               </span>
             )}
           </div>
@@ -108,49 +108,62 @@ const DetailModal = ({ record, onClose }) => {
               { label: "Warnings",    val: record.warningRows,  color: "yellow" },
               { label: "Invalid",     val: record.invalidRows,  color: "red"    },
               { label: "Users Created",val: record.createdUsers, color: "indigo"  },
-            ].map(({ label, val, color }) => (
-              <div key={label} className={`bg-${color}-50 border border-${color}-100 rounded-2xl p-3 text-center`}>
-                <p className={`text-xl font-black text-${color}-700`}>{val ?? 0}</p>
-                <p className={`text-[10px] font-bold text-${color}-600 uppercase mt-0.5`}>{label}</p>
-              </div>
-            ))}
+            ].map(({ label, val, color }) => {
+              const colMap = {
+                gray:   "bg-gray-50 dark:bg-gray-800/40 border-gray-100 dark:border-gray-700 text-gray-700 dark:text-gray-300",
+                green:  "bg-green-50 dark:bg-green-950/20 border-green-100 dark:border-green-900/30 text-green-700 dark:text-green-400",
+                blue:   "bg-blue-50 dark:bg-blue-950/20 border-blue-100 dark:border-blue-900/30 text-blue-700 dark:text-blue-400",
+                orange: "bg-orange-50 dark:bg-orange-950/20 border-orange-100 dark:border-orange-900/30 text-orange-700 dark:text-orange-400",
+                purple: "bg-purple-50 dark:bg-purple-950/20 border-purple-100 dark:border-purple-900/30 text-purple-700 dark:text-purple-400",
+                yellow: "bg-yellow-50 dark:bg-yellow-950/20 border-yellow-100 dark:border-yellow-900/30 text-yellow-700 dark:text-yellow-400",
+                red:    "bg-red-50 dark:bg-red-950/20 border-red-100 dark:border-red-900/30 text-red-700 dark:text-red-400",
+                indigo: "bg-indigo-50 dark:bg-indigo-950/20 border-indigo-100 dark:border-indigo-900/30 text-indigo-700 dark:text-indigo-400",
+              }[color] || "bg-gray-50 dark:bg-gray-800/40 border-gray-100 dark:border-gray-700 text-gray-700 dark:text-gray-300";
+
+              return (
+                <div key={label} className={`border rounded-2xl p-3 text-center ${colMap}`}>
+                  <p className="text-xl font-black">{val ?? 0}</p>
+                  <p className="text-[10px] font-bold uppercase mt-0.5 opacity-80">{label}</p>
+                </div>
+              );
+            })}
           </div>
 
           {/* Timing */}
           {record.importStartedAt && (
-            <div className="bg-gray-50 rounded-2xl p-4 text-sm space-y-1">
-              <p><span className="font-semibold text-gray-700">Started:</span> <span className="text-gray-500">{formatDate(record.importStartedAt)}</span></p>
-              <p><span className="font-semibold text-gray-700">Completed:</span> <span className="text-gray-500">{formatDate(record.importCompletedAt)}</span></p>
-              <p><span className="font-semibold text-gray-700">Duration:</span> <span className="text-gray-500">{record.executionTime}s</span></p>
+            <div className="bg-gray-50 dark:bg-gray-800/40 border border-gray-100 dark:border-gray-700/50 rounded-2xl p-4 text-sm space-y-1">
+              <p><span className="font-semibold text-gray-700 dark:text-gray-300">Started:</span> <span className="text-gray-500 dark:text-gray-400">{formatDate(record.importStartedAt)}</span></p>
+              <p><span className="font-semibold text-gray-700 dark:text-gray-300">Completed:</span> <span className="text-gray-500 dark:text-gray-400">{formatDate(record.importCompletedAt)}</span></p>
+              <p><span className="font-semibold text-gray-700 dark:text-gray-300">Duration:</span> <span className="text-gray-500 dark:text-gray-400">{record.executionTime}s</span></p>
             </div>
           )}
 
           {/* Notes (for failed imports) */}
           {record.notes && (
-            <div className="bg-red-50 border border-red-100 rounded-2xl p-4">
-              <p className="text-xs font-bold text-red-700 mb-1 uppercase">Error Notes</p>
-              <p className="text-sm text-red-600">{record.notes}</p>
+            <div className="bg-red-50 dark:bg-red-950/20 border border-red-100 dark:border-red-900/30 rounded-2xl p-4">
+              <p className="text-xs font-bold text-red-700 dark:text-red-400 mb-1 uppercase">Error Notes</p>
+              <p className="text-sm text-red-600 dark:text-red-400">{record.notes}</p>
             </div>
           )}
 
           {/* Download Reports */}
           <div className="space-y-3">
-            <p className="text-xs font-bold text-gray-500 uppercase tracking-wider">Download Reports</p>
+            <p className="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Download Reports</p>
             
             <button
                 onClick={() => downloadReport("combined", "Credentials.xlsx")}
                 disabled={downloading === "combined"}
-                className="w-full py-3 bg-[#0A2A5E] text-white rounded-xl font-bold hover:bg-[#071D43] transition-colors flex items-center justify-center gap-2 disabled:opacity-70 text-sm shadow-sm"
+                className="w-full py-3 bg-[#0A2A5E] hover:bg-[#071D43] text-white rounded-xl font-bold transition-colors flex items-center justify-center gap-2 disabled:opacity-70 text-sm shadow-sm"
               >
                 {downloading === "combined" ? <RefreshCw size={16} className="animate-spin" /> : <Download size={16} />}
                 Combined Credentials (.xlsx)
             </button>
-
+ 
             <div className="grid grid-cols-2 gap-2">
               <button
                 onClick={() => downloadReport("usernames", "Usernames.xlsx")}
                 disabled={downloading === "usernames"}
-                className="flex-1 py-3 bg-gray-100 text-gray-800 rounded-xl font-bold hover:bg-gray-200 transition-colors flex items-center justify-center gap-2 disabled:opacity-70 text-sm"
+                className="flex-1 py-3 bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 rounded-xl font-bold hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors flex items-center justify-center gap-2 disabled:opacity-70 text-sm"
               >
                 {downloading === "usernames" ? <RefreshCw size={16} className="animate-spin" /> : <Download size={16} />}
                 Usernames
@@ -158,7 +171,7 @@ const DetailModal = ({ record, onClose }) => {
               <button
                 onClick={() => downloadReport("passwords", "Passwords.xlsx")}
                 disabled={downloading === "passwords"}
-                className="flex-1 py-3 bg-gray-100 text-gray-800 rounded-xl font-bold hover:bg-gray-200 transition-colors flex items-center justify-center gap-2 disabled:opacity-70 text-sm"
+                className="flex-1 py-3 bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 rounded-xl font-bold hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors flex items-center justify-center gap-2 disabled:opacity-70 text-sm"
               >
                 {downloading === "passwords" ? <RefreshCw size={16} className="animate-spin" /> : <Download size={16} />}
                 Passwords
@@ -169,7 +182,7 @@ const DetailModal = ({ record, onClose }) => {
               <button
                 onClick={() => downloadReport("vcf", "Contacts.vcf")}
                 disabled={downloading === "vcf"}
-                className="flex-1 py-3 bg-green-50 text-green-700 border border-green-200 rounded-xl font-bold hover:bg-green-100 transition-colors flex items-center justify-center gap-1 disabled:opacity-70 text-[11px]"
+                className="flex-1 py-3 bg-green-50 dark:bg-green-950/20 text-green-700 dark:text-green-400 border border-green-200 dark:border-green-900/30 rounded-xl font-bold hover:bg-green-100 dark:hover:bg-green-900/40 transition-colors flex items-center justify-center gap-1 disabled:opacity-70 text-[11px]"
               >
                 {downloading === "vcf" ? <RefreshCw size={14} className="animate-spin" /> : <Download size={14} />}
                 VCF
@@ -177,7 +190,7 @@ const DetailModal = ({ record, onClose }) => {
               <button
                 onClick={() => downloadReport("csv", "Report.csv")}
                 disabled={downloading === "csv"}
-                className="flex-1 py-3 bg-blue-50 text-blue-700 border border-blue-200 rounded-xl font-bold hover:bg-blue-100 transition-colors flex items-center justify-center gap-1 disabled:opacity-70 text-[11px]"
+                className="flex-1 py-3 bg-blue-50 dark:bg-blue-950/20 text-blue-700 dark:text-blue-400 border border-blue-200 dark:border-blue-900/30 rounded-xl font-bold hover:bg-blue-100 dark:hover:bg-blue-900/40 transition-colors flex items-center justify-center gap-1 disabled:opacity-70 text-[11px]"
               >
                 {downloading === "csv" ? <RefreshCw size={14} className="animate-spin" /> : <Download size={14} />}
                 CSV
@@ -185,17 +198,17 @@ const DetailModal = ({ record, onClose }) => {
               <button
                 onClick={() => downloadReport("combined", "Report.json")}
                 disabled={downloading === "combined"}
-                className="flex-1 py-3 bg-purple-50 text-purple-700 border border-purple-200 rounded-xl font-bold hover:bg-purple-100 transition-colors flex items-center justify-center gap-1 disabled:opacity-70 text-[11px]"
+                className="flex-1 py-3 bg-purple-50 dark:bg-purple-950/20 text-purple-700 dark:text-purple-400 border border-purple-200 dark:border-purple-900/30 rounded-xl font-bold hover:bg-purple-100 dark:hover:bg-purple-900/40 transition-colors flex items-center justify-center gap-1 disabled:opacity-70 text-[11px]"
               >
                 {downloading === "combined" ? <RefreshCw size={14} className="animate-spin" /> : <Download size={14} />}
                 JSON
               </button>
             </div>
-
+ 
             <button
                 onClick={() => downloadReport("errors", "Errors.xlsx")}
                 disabled={downloading === "errors"}
-                className="w-full py-3 bg-red-50 text-red-700 border border-red-200 rounded-xl font-bold hover:bg-red-100 transition-colors flex items-center justify-center gap-2 disabled:opacity-70 text-sm"
+                className="w-full py-3 bg-red-50 dark:bg-red-950/20 text-red-700 dark:text-red-400 border border-red-200 dark:border-red-900/30 rounded-xl font-bold hover:bg-red-100 dark:hover:bg-red-900/40 transition-colors flex items-center justify-center gap-2 disabled:opacity-70 text-sm"
               >
                 {downloading === "errors" ? <RefreshCw size={16} className="animate-spin" /> : <AlertTriangle size={16} />}
                 Error Report
@@ -272,7 +285,7 @@ const AdminImportHistory = () => {
   const Skeleton = () => (
     <div className="animate-pulse space-y-3">
       {[...Array(5)].map((_, i) => (
-        <div key={i} className="h-14 bg-gray-100 rounded-2xl" />
+        <div key={i} className="h-14 bg-gray-100 dark:bg-gray-800 rounded-2xl" />
       ))}
     </div>
   );
@@ -280,17 +293,17 @@ const AdminImportHistory = () => {
   return (
     <div className="space-y-6 pb-10">
       {/* Header */}
-      <div className="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm">
+      <div className="bg-white dark:bg-[#1E293B] p-6 rounded-3xl border border-gray-100 dark:border-gray-800 shadow-sm">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900 font-heading flex items-center gap-2">
-              <History size={22} className="text-[#0A2A5E]" /> Import History
+            <h1 className="text-2xl font-bold text-gray-900 dark:text-white font-heading flex items-center gap-2">
+              <History size={22} className="text-[#0A2A5E] dark:text-[#F4B400]" /> Import History
             </h1>
-            <p className="text-sm text-gray-500 font-medium mt-1">
+            <p className="text-sm text-gray-500 dark:text-gray-400 font-medium mt-1">
               Permanent audit trail of all bulk Excel imports.
             </p>
           </div>
-          <button onClick={fetchHistory} className="p-2 text-gray-400 hover:text-[#0A2A5E] hover:bg-gray-50 rounded-xl transition-colors">
+          <button onClick={fetchHistory} className="p-2 text-gray-400 hover:text-[#0A2A5E] dark:hover:text-[#F4B400] hover:bg-gray-50 dark:hover:bg-gray-800 rounded-xl transition-colors">
             <RefreshCw size={18} />
           </button>
         </div>
@@ -300,18 +313,18 @@ const AdminImportHistory = () => {
       {stats && (
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {[
-            { label: "Total Imports",       val: stats.totalImports,          icon: <FileSpreadsheet size={18} />, color: "blue"  },
-            { label: "Successful",          val: stats.successCount,          icon: <CheckCircle     size={18} />, color: "green" },
-            { label: "Failed",              val: stats.failedCount,           icon: <XCircle         size={18} />, color: "red"   },
-            { label: "Members Imported",    val: stats.totalMembersImported,  icon: <Users           size={18} />, color: "indigo"},
-          ].map(({ label, val, icon, color }) => (
-            <div key={label} className={`bg-${color}-50 border border-${color}-100 rounded-2xl p-4 flex items-center gap-4`}>
-              <div className={`w-10 h-10 bg-${color}-100 rounded-xl flex items-center justify-center text-${color}-600 shrink-0`}>
+            { label: "Total Imports",       val: stats.totalImports,          icon: <FileSpreadsheet size={18} />, colorCls: "bg-blue-50 dark:bg-blue-950/20 border-blue-100 dark:border-blue-900/30 text-blue-700 dark:text-blue-400", iconCls: "bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400" },
+            { label: "Successful",          val: stats.successCount,          icon: <CheckCircle     size={18} />, colorCls: "bg-green-50 dark:bg-green-950/20 border-green-100 dark:border-green-900/30 text-green-700 dark:text-green-400", iconCls: "bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400" },
+            { label: "Failed",              val: stats.failedCount,           icon: <XCircle         size={18} />, colorCls: "bg-red-50 dark:bg-red-950/20 border-red-100 dark:border-red-900/30 text-red-700 dark:text-red-400", iconCls: "bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400" },
+            { label: "Members Imported",    val: stats.totalMembersImported,  icon: <Users           size={18} />, colorCls: "bg-indigo-50 dark:bg-indigo-950/20 border-indigo-100 dark:border-indigo-900/30 text-indigo-700 dark:text-indigo-400", iconCls: "bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400" },
+          ].map(({ label, val, icon, colorCls, iconCls }) => (
+            <div key={label} className={`border rounded-2xl p-4 flex items-center gap-4 ${colorCls}`}>
+              <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${iconCls}`}>
                 {icon}
               </div>
               <div>
-                <p className={`text-2xl font-black text-${color}-700`}>{val ?? 0}</p>
-                <p className={`text-xs font-bold text-${color}-600 uppercase`}>{label}</p>
+                <p className="text-2xl font-black leading-tight dark:text-white">{val ?? 0}</p>
+                <p className="text-xs font-bold uppercase opacity-80">{label}</p>
               </div>
             </div>
           ))}
@@ -319,7 +332,7 @@ const AdminImportHistory = () => {
       )}
 
       {/* Filters & Search */}
-      <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-4">
+      <div className="bg-white dark:bg-[#1E293B] rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm p-4">
         <div className="flex flex-wrap gap-3 items-center">
           {/* Search */}
           <div className="relative flex-1 min-w-[180px]">
@@ -329,7 +342,7 @@ const AdminImportHistory = () => {
               placeholder="Search by filename..."
               value={search}
               onChange={(e) => { setSearch(e.target.value); setPage(1); }}
-              className="w-full pl-9 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-[#0A2A5E]/20 outline-none transition-all"
+              className="w-full pl-9 pr-4 py-2 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl text-sm focus:ring-2 focus:ring-[#0A2A5E]/20 dark:focus:ring-[#F4B400]/20 outline-none transition-all text-gray-900 dark:text-white"
             />
           </div>
 
@@ -337,7 +350,7 @@ const AdminImportHistory = () => {
           <select
             value={statusFilter}
             onChange={(e) => { setStatusFilter(e.target.value); setPage(1); }}
-            className="py-2 px-3 bg-gray-50 border border-gray-200 rounded-xl text-sm font-medium focus:ring-2 focus:ring-[#0A2A5E]/20 outline-none"
+            className="py-2 px-3 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl text-sm font-medium focus:ring-2 focus:ring-[#0A2A5E]/20 dark:focus:ring-[#F4B400]/20 outline-none text-gray-900 dark:text-white"
           >
             <option value="">All Statuses</option>
             <option value="Completed">Completed</option>
@@ -348,13 +361,13 @@ const AdminImportHistory = () => {
 
           {/* Date range */}
           <input type="date" value={dateFrom} onChange={(e) => { setDateFrom(e.target.value); setPage(1); }}
-            className="py-2 px-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-[#0A2A5E]/20 outline-none" />
-          <span className="text-gray-400 text-sm font-medium">to</span>
+            className="py-2 px-3 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl text-sm focus:ring-2 focus:ring-[#0A2A5E]/20 dark:focus:ring-[#F4B400]/20 outline-none text-gray-900 dark:text-white" />
+          <span className="text-gray-400 dark:text-gray-500 text-sm font-medium">to</span>
           <input type="date" value={dateTo} onChange={(e) => { setDateTo(e.target.value); setPage(1); }}
-            className="py-2 px-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-[#0A2A5E]/20 outline-none" />
-
+            className="py-2 px-3 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl text-sm focus:ring-2 focus:ring-[#0A2A5E]/20 dark:focus:ring-[#F4B400]/20 outline-none text-gray-900 dark:text-white" />
+ 
           {hasFilters && (
-            <button onClick={clearFilters} className="py-2 px-3 text-sm font-bold text-gray-600 bg-gray-100 hover:bg-gray-200 rounded-xl transition-colors flex items-center gap-1">
+            <button onClick={clearFilters} className="py-2 px-3 text-sm font-bold text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-xl transition-colors flex items-center gap-1">
               <X size={14} /> Clear
             </button>
           )}
@@ -362,52 +375,52 @@ const AdminImportHistory = () => {
       </div>
 
       {/* Table */}
-      <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+      <div className="bg-white dark:bg-[#1E293B] rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm overflow-hidden">
         {loading ? (
           <div className="p-6"><Skeleton /></div>
         ) : history.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-24 text-center">
-            <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center text-gray-400 mb-4">
+            <div className="w-16 h-16 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center text-gray-400 mb-4">
               <History size={28} />
             </div>
-            <p className="text-lg font-bold text-gray-700">No import history found</p>
-            <p className="text-sm text-gray-500 mt-1">Import your first Excel file to see records here.</p>
+            <p className="text-lg font-bold text-gray-700 dark:text-white">No import history found</p>
+            <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Import your first Excel file to see records here.</p>
           </div>
         ) : (
           <>
             <div className="overflow-x-auto">
               <table className="w-full text-left border-collapse">
-                <thead className="bg-gray-50 border-b border-gray-200">
+                <thead className="bg-gray-50 dark:bg-gray-800/60 border-b border-gray-200 dark:border-gray-700">
                   <tr>
                     {["Import Date", "File Name", "Imported By", "Rows", "Imported", "Skipped", "Warnings", "Status", "Time", "Actions"].map(h => (
-                      <th key={h} className="px-4 py-3 text-xs font-bold text-gray-500 uppercase whitespace-nowrap">{h}</th>
+                      <th key={h} className="px-4 py-3 text-xs font-bold text-gray-500 dark:text-gray-400 uppercase whitespace-nowrap">{h}</th>
                     ))}
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-100">
+                <tbody className="divide-y divide-gray-100 dark:divide-gray-800">
                   {history.map((rec) => (
                     <motion.tr
                       key={rec._id}
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
-                      className="hover:bg-gray-50/70 transition-colors"
+                      className="hover:bg-gray-50/70 dark:hover:bg-gray-800/50 transition-colors"
                     >
-                      <td className="px-4 py-3 text-xs text-gray-500 whitespace-nowrap">{formatDate(rec.createdAt)}</td>
+                      <td className="px-4 py-3 text-xs text-gray-500 dark:text-gray-400 whitespace-nowrap">{formatDate(rec.createdAt)}</td>
                       <td className="px-4 py-3">
-                        <p className="text-sm font-semibold text-gray-900 max-w-[150px] truncate">{rec.fileName}</p>
+                        <p className="text-sm font-semibold text-gray-900 dark:text-white max-w-[150px] truncate">{rec.fileName}</p>
                       </td>
-                      <td className="px-4 py-3 text-sm text-gray-600">{rec.importedBy?.username ?? "—"}</td>
-                      <td className="px-4 py-3 text-sm font-bold text-gray-900">{rec.totalRows ?? 0}</td>
-                      <td className="px-4 py-3 text-sm font-bold text-green-600">{rec.importedRows ?? 0}</td>
-                      <td className="px-4 py-3 text-sm font-bold text-orange-500">{rec.skippedRows ?? 0}</td>
-                      <td className="px-4 py-3 text-sm font-bold text-yellow-600">{rec.warningRows ?? 0}</td>
+                      <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">{rec.importedBy?.username ?? "—"}</td>
+                      <td className="px-4 py-3 text-sm font-bold text-gray-900 dark:text-white">{rec.totalRows ?? 0}</td>
+                      <td className="px-4 py-3 text-sm font-bold text-green-600 dark:text-green-400">{rec.importedRows ?? 0}</td>
+                      <td className="px-4 py-3 text-sm font-bold text-orange-500 dark:text-orange-400">{rec.skippedRows ?? 0}</td>
+                      <td className="px-4 py-3 text-sm font-bold text-yellow-600 dark:text-yellow-400">{rec.warningRows ?? 0}</td>
                       <td className="px-4 py-3"><StatusBadge status={rec.status} /></td>
-                      <td className="px-4 py-3 text-xs text-gray-500 whitespace-nowrap">{formatDuration(rec.executionTime)}</td>
+                      <td className="px-4 py-3 text-xs text-gray-500 dark:text-gray-400 whitespace-nowrap">{formatDuration(rec.executionTime)}</td>
                       <td className="px-4 py-3">
                         <div className="flex items-center gap-2">
                           <button
                             onClick={() => setSelectedRecord(rec)}
-                            className="p-1.5 text-[#0A2A5E] hover:bg-blue-50 rounded-lg transition-colors"
+                            className="p-1.5 text-[#0A2A5E] dark:text-[#F4B400] hover:bg-blue-50 dark:hover:bg-blue-900/30 rounded-lg transition-colors"
                             title="View Details"
                           >
                             <Eye size={16} />
@@ -415,7 +428,7 @@ const AdminImportHistory = () => {
                           <button
                             onClick={() => handleDelete(rec.importId)}
                             disabled={deletingId === rec.importId}
-                            className="p-1.5 text-red-500 hover:bg-red-50 rounded-lg transition-colors disabled:opacity-50"
+                            className="p-1.5 text-red-500 hover:bg-red-50 dark:hover:bg-red-950/30 rounded-lg transition-colors disabled:opacity-50"
                             title="Delete Record"
                           >
                             {deletingId === rec.importId
@@ -429,26 +442,26 @@ const AdminImportHistory = () => {
                 </tbody>
               </table>
             </div>
-
+ 
             {/* Pagination */}
             {pagination.totalPages > 1 && (
-              <div className="flex items-center justify-between px-6 py-4 border-t border-gray-100">
-                <p className="text-sm text-gray-500">
-                  Showing page <span className="font-bold text-gray-700">{pagination.currentPage}</span> of <span className="font-bold text-gray-700">{pagination.totalPages}</span>
+              <div className="flex items-center justify-between px-6 py-4 border-t border-gray-100 dark:border-gray-800">
+                <p className="text-sm text-gray-500 dark:text-gray-400">
+                  Showing page <span className="font-bold text-gray-700 dark:text-white">{pagination.currentPage}</span> of <span className="font-bold text-gray-700 dark:text-white">{pagination.totalPages}</span>
                   <span className="ml-2 text-gray-400">({pagination.total} total)</span>
                 </p>
                 <div className="flex items-center gap-2">
                   <button
                     onClick={() => setPage(p => Math.max(1, p - 1))}
                     disabled={page === 1}
-                    className="p-2 rounded-xl bg-gray-100 hover:bg-gray-200 disabled:opacity-40 transition-colors"
+                    className="p-2 rounded-xl bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-750 text-gray-600 dark:text-gray-400 disabled:opacity-40 transition-colors"
                   >
                     <ChevronLeft size={16} />
                   </button>
                   <button
                     onClick={() => setPage(p => Math.min(pagination.totalPages, p + 1))}
                     disabled={page === pagination.totalPages}
-                    className="p-2 rounded-xl bg-gray-100 hover:bg-gray-200 disabled:opacity-40 transition-colors"
+                    className="p-2 rounded-xl bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-750 text-gray-600 dark:text-gray-400 disabled:opacity-40 transition-colors"
                   >
                     <ChevronRight size={16} />
                   </button>
