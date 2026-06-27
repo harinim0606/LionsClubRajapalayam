@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import {
-  Building2, Hash, Calendar, Users, MapPin, Clock,
+  Building2, Calendar, Users, MapPin, Clock,
   Star, Heart, Handshake, Leaf, Crown, Shield, Landmark,
   ChevronRight
 } from "lucide-react";
@@ -87,11 +87,7 @@ const ClubInformationCard = ({ club }) => {
           </div>
         </div>
 
-        {/* Club number badge */}
-        <div className="absolute top-4 right-4 flex items-center gap-1 bg-white/10 backdrop-blur border border-white/20 rounded-xl px-3 py-1.5">
-          <Hash size={12} className="text-[#F4B400]" />
-          <span className="text-white text-xs font-bold">{club.clubNumber}</span>
-        </div>
+
       </div>
 
       <div className="p-6 space-y-6">
