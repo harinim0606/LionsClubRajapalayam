@@ -1,0 +1,65 @@
+{
+  "sidebar": {
+    "dashboard": "முகப்பு (Dashboard)",
+    "memberDirectory": "உறுப்பினர் அடைவு",
+    "communication": "தொடர்பு",
+    "memberManagement": "உறுப்பினர் மேலாண்மை",
+    "excelImport": "எக்செல் இறக்குமதி",
+    "importHistory": "இறக்குமதி வரலாறு",
+    "excelExport": "எக்செல் ஏற்றுமதி",
+    "myProfile": "என் சுயவிவரம்",
+    "settings": "அமைப்புகள் (Settings)",
+    "admin": "நிர்வாகி",
+    "member": "உறுப்பினர்"
+  },
+  "dashboard": {
+    "title": "முகப்பு",
+    "welcome": "மீண்டும் வருக",
+    "totalMembers": "மொத்த உறுப்பினர்கள்",
+    "activeMembers": "செயலில் உள்ளவர்கள்",
+    "inactiveMembers": "செயலற்றவர்கள்",
+    "recentActivity": "சமீபத்திய செயல்பாடு",
+    "viewAll": "அனைத்தையும் காண்க"
+  },
+  "settings": {
+    "title": "அமைப்புகள்",
+    "appearance": {
+      "title": "தோற்றம்",
+      "theme": "கருப்பொருள்",
+      "light": "வெளிச்சம்",
+      "dark": "இருண்ட",
+      "system": "கணினி அமைப்பு"
+    },
+    "language": {
+      "title": "மொழி",
+      "selectLanguage": "மொழியைத் தேர்ந்தெடுக்கவும்",
+      "en": "ஆங்கிலம்",
+      "ta": "தமிழ்",
+      "hi": "இந்தி",
+      "ml": "மலையாளம்",
+      "te": "தெலுங்கு"
+    },
+    "accessibility": {
+      "title": "அணுகல்தன்மை",
+      "textSize": "உரை அளவு",
+      "small": "சிறிய",
+      "medium": "நடுத்தர",
+      "large": "பெரிய",
+      "xlarge": "மிகப் பெரிய",
+      "fontFamily": "எழுத்துரு குடும்பம்",
+      "default": "இயல்புநிலை",
+      "highContrast": "அதிக மாறுபாடு",
+      "reduceMotion": "இயக்கத்தைக் குறைக்கவும்",
+      "lineSpacing": "வரி இடைவெளி",
+      "letterSpacing": "எழுத்து இடைவெளி",
+      "sidebarDensity": "பக்கப்பட்டி அடர்த்தி",
+      "compact": "கச்சிதமான",
+      "comfortable": "வசதியான",
+      "roundedCorners": "வளைந்த மூலைகள்"
+    },
+    "saveChanges": "மாற்றங்களைச் சேமிக்கவும்",
+    "resetSettings": "அமைப்புகளை மீட்டமைக்கவும்",
+    "successMessage": "அமைப்புகள் வெற்றிகரமாக புதுப்பிக்கப்பட்டன",
+    "errorMessage": "அமைப்புகளைப் புதுப்பிப்பதில் தோல்வி"
+  }
+}

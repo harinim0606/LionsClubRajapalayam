@@ -1,0 +1,65 @@
+{
+  "sidebar": {
+    "dashboard": "Dashboard",
+    "memberDirectory": "Member Directory",
+    "communication": "Communication",
+    "memberManagement": "Member Management",
+    "excelImport": "Excel Import",
+    "importHistory": "Import History",
+    "excelExport": "Excel Export",
+    "myProfile": "My Profile",
+    "settings": "Settings",
+    "admin": "Admin",
+    "member": "Member"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "welcome": "Welcome back",
+    "totalMembers": "Total Members",
+    "activeMembers": "Active Members",
+    "inactiveMembers": "Inactive Members",
+    "recentActivity": "Recent Activity",
+    "viewAll": "View All"
+  },
+  "settings": {
+    "title": "Settings",
+    "appearance": {
+      "title": "Appearance",
+      "theme": "Theme",
+      "light": "Light",
+      "dark": "Dark",
+      "system": "System"
+    },
+    "language": {
+      "title": "Language",
+      "selectLanguage": "Select Language",
+      "en": "English",
+      "ta": "Tamil",
+      "hi": "Hindi",
+      "ml": "Malayalam",
+      "te": "Telugu"
+    },
+    "accessibility": {
+      "title": "Accessibility",
+      "textSize": "Text Size",
+      "small": "Small",
+      "medium": "Medium",
+      "large": "Large",
+      "xlarge": "Extra Large",
+      "fontFamily": "Font Family",
+      "default": "Default",
+      "highContrast": "High Contrast",
+      "reduceMotion": "Reduce Motion",
+      "lineSpacing": "Line Spacing",
+      "letterSpacing": "Letter Spacing",
+      "sidebarDensity": "Sidebar Density",
+      "compact": "Compact",
+      "comfortable": "Comfortable",
+      "roundedCorners": "Rounded Corners"
+    },
+    "saveChanges": "Save Changes",
+    "resetSettings": "Reset Settings",
+    "successMessage": "Settings updated successfully",
+    "errorMessage": "Failed to update settings"
+  }
+}

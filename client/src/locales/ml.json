@@ -1,0 +1,65 @@
+{
+  "sidebar": {
+    "dashboard": "ഡാഷ്ബോർഡ്",
+    "memberDirectory": "അംഗങ്ങളുടെ ഡയറക്ടറി",
+    "communication": "ആശയവിനിമയം",
+    "memberManagement": "അംഗങ്ങളുടെ മാനേജ്മെന്റ്",
+    "excelImport": "എക്സൽ ഇംപോർട്ട്",
+    "importHistory": "ഇംപോർട്ട് ചരിത്രം",
+    "excelExport": "എക്സൽ എക്സ്പോർട്ട്",
+    "myProfile": "എന്റെ പ്രൊഫൈൽ",
+    "settings": "ക്രമീകരണങ്ങൾ",
+    "admin": "അഡ്മിൻ",
+    "member": "അംഗം"
+  },
+  "dashboard": {
+    "title": "ഡാഷ്ബോർഡ്",
+    "welcome": "തിരികെ സ്വാഗതം",
+    "totalMembers": "ആകെ അംഗങ്ങൾ",
+    "activeMembers": "സജീവ അംഗങ്ങൾ",
+    "inactiveMembers": "നിഷ്ക്രിയ അംഗങ്ങൾ",
+    "recentActivity": "സമീപകാല പ്രവർത്തനങ്ങൾ",
+    "viewAll": "എല്ലാം കാണുക"
+  },
+  "settings": {
+    "title": "ക്രമീകരണങ്ങൾ",
+    "appearance": {
+      "title": "രൂപം",
+      "theme": "തീം",
+      "light": "വെളിച്ചം",
+      "dark": "ഇരുണ്ട",
+      "system": "സിസ്റ്റം"
+    },
+    "language": {
+      "title": "ഭാഷ",
+      "selectLanguage": "ഭാഷ തിരഞ്ഞെടുക്കുക",
+      "en": "ഇംഗ്ലീഷ്",
+      "ta": "തമിഴ്",
+      "hi": "ഹിന്ദി",
+      "ml": "മലയാളം",
+      "te": "തെലുങ്ക്"
+    },
+    "accessibility": {
+      "title": "പ്രവേശനക്ഷമത",
+      "textSize": "വാചക വലുപ്പം",
+      "small": "ചെറുത്",
+      "medium": "ഇടത്തരം",
+      "large": "വലുത്",
+      "xlarge": "വളരെ വലുത്",
+      "fontFamily": "ഫോണ്ട്",
+      "default": "ഡിഫോൾട്ട്",
+      "highContrast": "ഉയർന്ന കോൺട്രാസ്റ്റ്",
+      "reduceMotion": "ചലനം കുറയ്ക്കുക",
+      "lineSpacing": "വരി അകലം",
+      "letterSpacing": "അക്ഷര അകലം",
+      "sidebarDensity": "സൈഡ്ബാർ സാന്ദ്രത",
+      "compact": "കോംപാക്റ്റ്",
+      "comfortable": "സൗകര്യപ്രദമായ",
+      "roundedCorners": "വൃത്താകൃതിയിലുള്ള മൂലകൾ"
+    },
+    "saveChanges": "മാറ്റങ്ങൾ സംരക്ഷിക്കുക",
+    "resetSettings": "പുനഃസജ്ജമാക്കുക",
+    "successMessage": "ക്രമീകരണങ്ങൾ വിജയകരമായി അപ്‌ഡേറ്റുചെയ്‌തു",
+    "errorMessage": "ക്രമീകരണങ്ങൾ അപ്‌ഡേറ്റുചെയ്യുന്നതിൽ പരാജയപ്പെട്ടു"
+  }
+}

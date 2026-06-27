@@ -1,0 +1,65 @@
+{
+  "sidebar": {
+    "dashboard": "డాష్‌బోర్డ్",
+    "memberDirectory": "సభ్యుల డైరెక్టరీ",
+    "communication": "కమ్యూనికేషన్",
+    "memberManagement": "సభ్యుల నిర్వహణ",
+    "excelImport": "ఎక్సెల్ దిగుమతి",
+    "importHistory": "దిగుమతి చరిత్ర",
+    "excelExport": "ఎక్సెల్ ఎక్స్పోర్ట్",
+    "myProfile": "నా ప్రొఫైల్",
+    "settings": "సెట్టింగ్‌లు",
+    "admin": "అడ్మిన్",
+    "member": "సభ్యుడు"
+  },
+  "dashboard": {
+    "title": "డాష్‌బోర్డ్",
+    "welcome": "తిరిగి స్వాగతం",
+    "totalMembers": "మొత్తం సభ్యులు",
+    "activeMembers": "క్రియాశీల సభ్యులు",
+    "inactiveMembers": "క్రియారహిత సభ్యులు",
+    "recentActivity": "ఇటీవలి కార్యాచరణ",
+    "viewAll": "అన్ని చూడండి"
+  },
+  "settings": {
+    "title": "సెట్టింగ్‌లు",
+    "appearance": {
+      "title": "స్వరూపం",
+      "theme": "థీమ్",
+      "light": "వెలుగు",
+      "dark": "చీకటి",
+      "system": "సిస్టమ్"
+    },
+    "language": {
+      "title": "భాష",
+      "selectLanguage": "భాషను ఎంచుకోండి",
+      "en": "ఇంగ్లీష్",
+      "ta": "తమిళం",
+      "hi": "హిందీ",
+      "ml": "మలయాళం",
+      "te": "తెలుగు"
+    },
+    "accessibility": {
+      "title": "ప్రాప్యత",
+      "textSize": "వచన పరిమాణం",
+      "small": "చిన్న",
+      "medium": "మధ్యస్థం",
+      "large": "పెద్ద",
+      "xlarge": "చాలా పెద్ద",
+      "fontFamily": "ఫాంట్",
+      "default": "డిఫాల్ట్",
+      "highContrast": "హై కాంట్రాస్ట్",
+      "reduceMotion": "కదలికను తగ్గించండి",
+      "lineSpacing": "లైన్ అంతరం",
+      "letterSpacing": "అక్షరాల అంతరం",
+      "sidebarDensity": "సైడ్‌బార్ సాంద్రత",
+      "compact": "కాంపాక్ట్",
+      "comfortable": "సౌకర్యవంతమైన",
+      "roundedCorners": "గుండ్రని మూలలు"
+    },
+    "saveChanges": "మార్పులను సేవ్ చేయండి",
+    "resetSettings": "రీసెట్ చేయండి",
+    "successMessage": "సెట్టింగ్‌లు విజయవంతంగా నవీకరించబడ్డాయి",
+    "errorMessage": "సెట్టింగ్‌లను నవీకరించడం విఫలమైంది"
+  }
+}

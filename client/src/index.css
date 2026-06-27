@@ -1,0 +1,150 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Roboto:wght@400;500;700&family=Open+Sans:wght@400;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-sans-dynamic, 'Inter', system-ui, -apple-system, sans-serif);
+  --font-heading: 'Outfit', sans-serif;
+  
+  --color-primary: #0A2A5E;
+  --color-primary-hover: #071D43;
+  --color-secondary: #F4B400;
+  --color-secondary-hover: #D69E00;
+  
+  /* Light Theme Defaults */
+  --color-bg-light: #F5F7FB;
+  --color-text-dark: #0F172A;
+  --color-text-muted: #64748B;
+  --color-card-bg: #ffffff;
+  --color-border: rgba(226, 232, 240, 0.8);
+  
+  --radius-card: var(--radius-card-dynamic, 16px);
+  --radius-button: var(--radius-button-dynamic, 12px);
+}
+
+/* Dark Theme Overrides */
+html.dark {
+  --color-bg-light: #0F172A;
+  --color-text-dark: #F8FAFC;
+  --color-text-muted: #CBD5E1;
+  --color-card-bg: #1E293B;
+  --color-border: #334155;
+  --color-primary-hover: #1E3A8A;
+}
+
+/* High Contrast Overrides */
+html.high-contrast {
+  --color-text-dark: #000000;
+  --color-text-muted: #111111;
+  --color-border: #000000;
+}
+
+html.dark.high-contrast {
+  --color-text-dark: #FFFFFF;
+  --color-text-muted: #EEEEEE;
+  --color-border: #FFFFFF;
+}
+
+/* Base Accessibility Variables */
+:root {
+  --font-size-base: 1rem;
+  --line-height-base: 1;
+  --letter-spacing-base: 0px;
+  --font-sans-dynamic: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* Custom Base Styles */
+html {
+  font-size: var(--font-size-base);
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-bg-light);
+  color: var(--color-text-dark);
+  line-height: calc(1.5 * var(--line-height-base));
+  letter-spacing: var(--letter-spacing-base);
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Accessibility overrides */
+html.reduce-motion * {
+  animation: none !important;
+  transition: none !important;
+}
+
+html.no-rounded-corners {
+  --radius-card-dynamic: 0px;
+  --radius-button-dynamic: 0px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+}
+
+/* Premium UI Card class */
+.premium-card {
+  background-color: var(--color-card-bg);
+  border-radius: var(--radius-card);
+  border: 1px solid var(--color-border);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -1px rgba(0, 0, 0, 0.01);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.premium-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.04), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
+}
+
+/* Premium utility classes */
+.btn-primary {
+  background-color: var(--color-primary);
+  color: #ffffff;
+  padding: 0.625rem 1.25rem;
+  border-radius: var(--radius-button);
+  font-weight: 500;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 6px -1px rgba(10, 42, 94, 0.1), 0 2px 4px -1px rgba(10, 42, 94, 0.06);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background-color: var(--color-primary-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 15px -3px rgba(10, 42, 94, 0.15), 0 4px 6px -2px rgba(10, 42, 94, 0.05);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-secondary {
+  background-color: var(--color-secondary);
+  color: #0F172A;
+  padding: 0.625rem 1.25rem;
+  border-radius: var(--radius-button);
+  font-weight: 600;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 6px -1px rgba(244, 180, 0, 0.1), 0 2px 4px -1px rgba(244, 180, 0, 0.06);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-secondary-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 15px -3px rgba(244, 180, 0, 0.15), 0 4px 6px -2px rgba(244, 180, 0, 0.05);
+}
+
+.btn-secondary:active {
+  transform: translateY(0);
+}

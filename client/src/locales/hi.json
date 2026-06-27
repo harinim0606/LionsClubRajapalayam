@@ -1,0 +1,65 @@
+{
+  "sidebar": {
+    "dashboard": "डैशबोर्ड",
+    "memberDirectory": "सदस्य निर्देशिका",
+    "communication": "संचार",
+    "memberManagement": "सदस्य प्रबंधन",
+    "excelImport": "एक्सेल आयात",
+    "importHistory": "आयात इतिहास",
+    "excelExport": "एक्सेल निर्यात",
+    "myProfile": "मेरी प्रोफ़ाइल",
+    "settings": "सेटिंग्स",
+    "admin": "व्यवस्थापक",
+    "member": "सदस्य"
+  },
+  "dashboard": {
+    "title": "डैशबोर्ड",
+    "welcome": "वापसी पर स्वागत है",
+    "totalMembers": "कुल सदस्य",
+    "activeMembers": "सक्रिय सदस्य",
+    "inactiveMembers": "निष्क्रिय सदस्य",
+    "recentActivity": "हाल की गतिविधि",
+    "viewAll": "सभी देखें"
+  },
+  "settings": {
+    "title": "सेटिंग्स",
+    "appearance": {
+      "title": "दिखावट",
+      "theme": "थीम",
+      "light": "हल्का",
+      "dark": "गहरा",
+      "system": "सिस्टम"
+    },
+    "language": {
+      "title": "भाषा",
+      "selectLanguage": "भाषा चुनें",
+      "en": "अंग्रेज़ी",
+      "ta": "तमिल",
+      "hi": "हिन्दी",
+      "ml": "मलयालम",
+      "te": "तेलुगू"
+    },
+    "accessibility": {
+      "title": "पहुंच-योग्यता",
+      "textSize": "पाठ का आकार",
+      "small": "छोटा",
+      "medium": "मध्यम",
+      "large": "बड़ा",
+      "xlarge": "बहुत बड़ा",
+      "fontFamily": "फ़ॉन्ट",
+      "default": "डिफ़ॉल्ट",
+      "highContrast": "उच्च कंट्रास्ट",
+      "reduceMotion": "गति कम करें",
+      "lineSpacing": "पंक्ति रिक्ति",
+      "letterSpacing": "अक्षर रिक्ति",
+      "sidebarDensity": "साइडबार घनत्व",
+      "compact": "कॉम्पैक्ट",
+      "comfortable": "आरामदायक",
+      "roundedCorners": "गोल कोने"
+    },
+    "saveChanges": "परिवर्तन सहेजें",
+    "resetSettings": "सेटिंग्स रीसेट करें",
+    "successMessage": "सेटिंग्स सफलतापूर्वक अपडेट की गईं",
+    "errorMessage": "सेटिंग्स अपडेट करने में विफल"
+  }
+}

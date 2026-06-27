@@ -1,0 +1,49 @@
+# Dependencies
+node_modules/
+
+# Environment
+.env
+.env.*
+
+# Build
+dist/
+build/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Temporary files
+storage/imports/previews/
+storage/imports/temp/
+
+# Uploads
+uploads/
+
+# Storage
+storage/
+
+# Scratch / temporary development files
+scratch/
+
+# Test Excel files
+*.xlsx
+*.xls
+
+# Client build output
+client/dist/
+
+# Client dependencies (if present)
+client/node_modules/
+
+# Coverage
+coverage/
