@@ -259,25 +259,25 @@ const AdminMembers = () => {
 
       {/* Pagination */}
       {!loading && members.length > 0 && (
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white px-6 py-4 rounded-2xl border border-gray-100 shadow-sm">
-          <p className="text-sm text-gray-500 font-medium">
-            Showing <span className="font-bold text-gray-900">{(pagination.page - 1) * pagination.limit + 1}</span> to <span className="font-bold text-gray-900">{Math.min(pagination.page * pagination.limit, pagination.totalMembers)}</span> of <span className="font-bold text-gray-900">{pagination.totalMembers}</span> members
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white dark:bg-[#1E293B] px-6 py-4 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm">
+          <p className="text-sm text-gray-500 dark:text-gray-400 font-medium">
+            Showing <span className="font-bold text-gray-900 dark:text-white">{(pagination.page - 1) * pagination.limit + 1}</span> to <span className="font-bold text-gray-900 dark:text-white">{Math.min(pagination.page * pagination.limit, pagination.totalMembers)}</span> of <span className="font-bold text-gray-900 dark:text-white">{pagination.totalMembers}</span> members
           </p>
           <div className="flex items-center gap-2">
             <button
               onClick={() => handlePageChange(pagination.page - 1)}
               disabled={pagination.page === 1}
-              className="w-9 h-9 flex items-center justify-center rounded-xl border border-gray-200 text-gray-600 hover:bg-gray-50 disabled:opacity-50 transition-colors"
+              className="w-9 h-9 flex items-center justify-center rounded-xl border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 disabled:opacity-50 transition-colors"
             >
               <ChevronLeft size={16} />
             </button>
-            <span className="text-sm font-bold text-gray-900 px-2">
+            <span className="text-sm font-bold text-gray-900 dark:text-white px-2">
               Page {pagination.page} of {pagination.totalPages || 1}
             </span>
             <button
               onClick={() => handlePageChange(pagination.page + 1)}
               disabled={pagination.page === pagination.totalPages || pagination.totalPages === 0}
-              className="w-9 h-9 flex items-center justify-center rounded-xl border border-gray-200 text-gray-600 hover:bg-gray-50 disabled:opacity-50 transition-colors"
+              className="w-9 h-9 flex items-center justify-center rounded-xl border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 disabled:opacity-50 transition-colors"
             >
               <ChevronRight size={16} />
             </button>

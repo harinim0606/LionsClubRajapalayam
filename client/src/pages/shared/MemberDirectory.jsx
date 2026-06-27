@@ -274,14 +274,14 @@ const MemberDirectory = () => {
               </motion.div>
 
               {/* 3. Pagination Footer Section */}
-              <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-gray-100 bg-white p-4 rounded-2xl shadow-sm border">
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-gray-100 dark:border-gray-800 bg-white dark:bg-[#1E293B] p-4 rounded-2xl shadow-sm border">
                 {/* Page Size Select */}
                 <div className="flex items-center gap-2 text-xs text-gray-500 font-medium">
                   <span>Show</span>
                   <select
                     value={limit}
                     onChange={(e) => handleLimitChange(parseInt(e.target.value, 10))}
-                    className="bg-gray-50 border border-gray-200 rounded-lg px-2 py-1 text-xs text-gray-700 outline-none focus:ring-1 focus:ring-[#0A2A5E] transition-all"
+                    className="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg px-2 py-1 text-xs text-gray-700 dark:text-gray-300 outline-none focus:ring-1 focus:ring-[#0A2A5E] dark:focus:ring-[#F4B400] transition-all"
                   >
                     <option value={10}>10</option>
                     <option value={20}>20</option>
@@ -289,18 +289,18 @@ const MemberDirectory = () => {
                   </select>
                   <span>members per page</span>
                 </div>
-
+ 
                 {/* Page Navigation Controls */}
                 <div className="flex items-center gap-1.5">
                   <button
                     onClick={() => handlePageChange(page - 1)}
                     disabled={page <= 1}
-                    className="p-2 border border-gray-200 rounded-xl hover:bg-gray-50 disabled:opacity-40 disabled:hover:bg-transparent transition-colors cursor-pointer shrink-0"
+                    className="p-2 border border-gray-200 dark:border-gray-700 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800 disabled:opacity-40 disabled:hover:bg-transparent transition-colors cursor-pointer shrink-0 text-gray-600 dark:text-gray-400"
                     title="Previous Page"
                   >
                     <ChevronLeft size={16} />
                   </button>
-
+ 
                   <div className="flex items-center gap-1 px-2">
                     {[...Array(data.pagination.totalPages)].map((_, i) => {
                       const pageNum = i + 1;
@@ -316,15 +316,15 @@ const MemberDirectory = () => {
                         }
                         return null;
                       }
-
+ 
                       return (
                         <button
                           key={pageNum}
                           onClick={() => handlePageChange(pageNum)}
                           className={`h-8 w-8 flex items-center justify-center rounded-lg text-xs font-bold transition-all border-0 cursor-pointer ${
                             pageNum === page
-                              ? "bg-[#0A2A5E] text-white shadow-sm shadow-[#0A2A5E]/20"
-                              : "text-gray-600 hover:bg-gray-100"
+                              ? "bg-[#0A2A5E] text-white shadow-sm shadow-[#0A2A5E]/20 dark:bg-[#F4B400] dark:text-black dark:shadow-[#F4B400]/20"
+                              : "text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800"
                           }`}
                         >
                           {pageNum}
@@ -332,11 +332,11 @@ const MemberDirectory = () => {
                       );
                     })}
                   </div>
-
+ 
                   <button
                     onClick={() => handlePageChange(page + 1)}
                     disabled={page >= data.pagination.totalPages}
-                    className="p-2 border border-gray-200 rounded-xl hover:bg-gray-50 disabled:opacity-40 disabled:hover:bg-transparent transition-colors cursor-pointer shrink-0"
+                    className="p-2 border border-gray-200 dark:border-gray-700 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800 disabled:opacity-40 disabled:hover:bg-transparent transition-colors cursor-pointer shrink-0 text-gray-600 dark:text-gray-400"
                     title="Next Page"
                   >
                     <ChevronRight size={16} />
