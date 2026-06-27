@@ -53,7 +53,7 @@ const ProfileHeader = ({ member, canEdit, isEditing, setIsEditing, profileId }) 
               )}
             </div>
  
-            <div className="flex-1 w-full flex flex-col sm:flex-row sm:justify-between items-start gap-4">
+            <div className="flex-1 w-full flex flex-col sm:flex-row sm:justify-between items-start sm:items-center gap-4">
               {/* Member Core Details */}
               <div className="space-y-1">
                 <div className="flex flex-wrap items-center gap-3">
@@ -102,16 +102,6 @@ const ProfileHeader = ({ member, canEdit, isEditing, setIsEditing, profileId }) 
                 >
                   <Printer size={18} />
                   <span className="hidden sm:inline">Print</span>
-                </button>
-                
-                {/* Download PDF - Placeholder */}
-                <button
-                  disabled
-                  className="flex items-center justify-center gap-2 bg-gray-50 dark:bg-gray-900/50 text-gray-400 dark:text-gray-600 px-4 py-2 rounded-lg font-medium border border-gray-200 dark:border-gray-800 cursor-not-allowed"
-                  title="Download PDF (Coming Soon)"
-                >
-                  <Download size={18} />
-                  <span className="hidden sm:inline">PDF</span>
                 </button>
               </div>
             </div>
