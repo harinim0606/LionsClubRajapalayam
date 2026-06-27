@@ -153,10 +153,10 @@ const MemberDirectory = () => {
         
         {/* Dynamic statistics badge */}
         {!loading && !error && data && (
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#0A2A5E]/5 border border-[#0A2A5E]/10 rounded-2xl">
-            <Users size={16} className="text-[#0A2A5E]" />
-            <span className="text-xs font-semibold text-gray-700">
-              Total Members: <strong className="text-[#0A2A5E]">{data.pagination.totalMembers}</strong>
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#0A2A5E]/5 dark:bg-[#F4B400]/10 border border-[#0A2A5E]/10 dark:border-[#F4B400]/20 rounded-2xl">
+            <Users size={16} className="text-[#0A2A5E] dark:text-[#F4B400]" />
+            <span className="text-xs font-semibold text-gray-700 dark:text-gray-300">
+              Total Members: <strong className="text-[#0A2A5E] dark:text-[#F4B400]">{data.pagination.totalMembers}</strong>
             </span>
           </div>
         )}
