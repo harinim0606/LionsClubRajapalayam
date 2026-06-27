@@ -81,7 +81,7 @@ export const useCommunication = () => {
       return;
     }
     const url = `mailto:${member.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    window.open(url, '_self');
+    window.open(url, '_blank');
   };
 
   // ─── Bulk WhatsApp (Batching) ──────────────────────────────────────────────
@@ -134,9 +134,9 @@ export const useCommunication = () => {
 
     for (let i = 0; i < valid.length; i += BATCH_SIZE) {
       const batchMembers = valid.slice(i, i + BATCH_SIZE);
-      const bcc = batchMembers.map(m => m.email).join(',');
+      const to = batchMembers.map(m => m.email).join(',');
       
-      const url = `mailto:?bcc=${bcc}&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      const url = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
       
       generatedBatches.push({
         batchNumber: Math.floor(i / BATCH_SIZE) + 1,
