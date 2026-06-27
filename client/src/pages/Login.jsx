@@ -1,5 +1,5 @@
 import { useState } from "react";
-import logo from "../assets/logoLionsClub.jpeg";
+import logo from "../assets/logoLionsClub.png";
 import { useAuth } from "../context/AuthContext";
 import { motion } from "framer-motion";
 import { User, Lock, ArrowRight, EyeOff, Eye, AlertCircle } from "lucide-react";

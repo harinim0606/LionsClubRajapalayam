@@ -1,5 +1,5 @@
 import { useState } from "react";
-import logo from "../../assets/logoLionsClub.jpeg";
+import logo from "../../assets/logoLionsClub.png";
 import { Outlet, NavLink, useLocation } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { useTranslation } from "react-i18next";
